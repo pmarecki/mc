@@ -1,0 +1,13 @@
+ip maddr
+
+(...)
+2:	ens3
+	inet  230.0.0.0
+	inet  224.0.0.251
+	inet  224.0.0.252
+	inet  224.0.0.1
+
+
+b$ smcroute -d
+b$ smcroute -j eth1 233.37.54.71
+^^^ program to manage MC routes and joins

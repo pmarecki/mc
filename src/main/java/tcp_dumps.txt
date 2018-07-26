@@ -1,0 +1,11 @@
+tcpdump -n ether multicast
+
+14:25:21.619883 IP 10.10.0.55 > 224.0.0.22: igmp v3 report, 1 group record(s)
+14:25:21.776909 IP 10.10.90.3 > 224.0.0.1: igmp query v2 [max resp time 10]
+14:25:22.379882 IP 10.10.0.55 > 224.0.0.22: igmp v3 report, 1 group record(s)
+
+14:25:24.791916 IP 10.10.90.3 > 224.0.0.1: igmp query v2 [max resp time 10]
+14:25:25.099949 IP 10.10.0.55 > 224.0.0.22: igmp v3 report, 1 group record(s)
+14:25:25.419915 IP 10.10.0.55 > 224.0.0.22: igmp v3 report, 1 group record(s)
+
+
