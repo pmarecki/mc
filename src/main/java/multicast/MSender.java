@@ -1,11 +1,11 @@
 package multicast;
 
 import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
 import static java.lang.System.currentTimeMillis;
+import static java.lang.System.nanoTime;
 
 public class MSender {
     private static byte[] createMessage(int bytes) {
@@ -15,9 +15,15 @@ public class MSender {
         return sb.toString().getBytes();
     }
 
+    public static void waitMicroseconds(long delay) {
+        delay *= 1000;
+        long ss = nanoTime();
+        while(ss + delay >= nanoTime());
+    }
+
     public static void main(String[] args) throws Exception {
         int packetSize = 1000;
-        int packetCount = 50000;
+        int packetCount = 4;
         int delayUsec = 1;
         int port = 4446;
 
@@ -39,7 +45,7 @@ public class MSender {
         DatagramPacket packet = new DatagramPacket(data, data.length, net, port);
         for (int i = 0; i < packetCount; i++) {
             socket.send(packet);
-            NanoSleep.waitMicroseconds(delayUsec);
+            waitMicroseconds(delayUsec);
         }
         socket.send(new DatagramPacket("exit".getBytes(), 4, net, port));
         System.out.println("<<< writer finished (" + (currentTimeMillis()-st) + "ms) >>>");

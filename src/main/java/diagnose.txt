@@ -11,3 +11,9 @@ ip maddr
 b$ smcroute -d
 b$ smcroute -j eth1 233.37.54.71
 ^^^ program to manage MC routes and joins
+
+
+-----------------
+netstat -ng   ; not available under RHEL7  (ip maddr)
+# see: https://dougvitale.wordpress.com/tag/iproute2/
+

@@ -15,6 +15,9 @@ public class MReceiver {
 
         System.out.println("--------------Receiver--------------");
         System.out.println("SO_RCVBUF (buffer size): " + socket.getReceiveBufferSize());
+        System.out.println("socket address: " + socket.getLocalSocketAddress());
+        System.out.println("socket iface: " + socket.getInterface());
+        System.out.println("socket TTL: " + socket.getTimeToLive());
 
         byte[] buf = new byte[1024];
         int cnt = 0;
