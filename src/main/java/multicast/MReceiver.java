@@ -11,9 +11,9 @@ public class MReceiver {
         MulticastSocket socket = null;
         socket = new MulticastSocket(4446);
         socket.setReceiveBufferSize(1<<20);
+        socket.setNetworkInterface(NetworkInterface.getByName("ens3"));
         InetAddress group = InetAddress.getByName("230.0.0.0");
         socket.joinGroup(group);
-        socket.setNetworkInterface(NetworkInterface.getByName("ens3"));
 
         System.out.println("--------------Receiver--------------");
         System.out.println("SO_RCVBUF (buffer size): " + socket.getReceiveBufferSize());

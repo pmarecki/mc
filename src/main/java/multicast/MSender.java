@@ -32,7 +32,8 @@ public class MSender {
 
         byte[] data = createMessage(packetSize);
 //        socket.setSendBufferSize(500000);
-//        socket.setTimeToLive(10);
+        socket.setTimeToLive(10);
+        socket.setBroadcast(true);
 
         System.out.println("--------------Sender--------------");
         System.out.println("SO_SNDBUF (buffer size):" + socket.getSendBufferSize());
