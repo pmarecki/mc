@@ -3,6 +3,7 @@ package multicast;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.net.NetworkInterface;
 
 import static java.lang.System.currentTimeMillis;
 import static java.lang.System.nanoTime;
@@ -29,6 +30,8 @@ public class MSender {
 
         MulticastSocket socket = new MulticastSocket();
         InetAddress net = InetAddress.getByName("230.0.0.0");
+        socket.setNetworkInterface(NetworkInterface.getByName("ens3"));
+
 
         byte[] data = createMessage(packetSize);
 //        socket.setSendBufferSize(500000);

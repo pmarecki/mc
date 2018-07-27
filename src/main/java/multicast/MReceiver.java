@@ -9,6 +9,8 @@ public class MReceiver {
 
     public static void main(String[] args) throws Exception {
         MulticastSocket socket = null;
+        //on RHEL: remember to add 4446/udp to firewall:
+        //firewall-cmd --zone=public --add-port=4446/udp
         socket = new MulticastSocket(4446);
         socket.setReceiveBufferSize(1<<20);
         socket.setNetworkInterface(NetworkInterface.getByName("ens3"));

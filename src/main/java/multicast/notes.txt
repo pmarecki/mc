@@ -1,0 +1,7 @@
+
+
+- Receiver should have interface set (listens there; important):
+    socket.setNetworkInterface(NetworkInterface.getByName("ens3"));
+- for Sender it is also non-trivial to which NIC the MC traffic will be sent
+    socket.setNetworkInterface(NetworkInterface.getByName("ens3" || "lo"));
+    (debug via:
