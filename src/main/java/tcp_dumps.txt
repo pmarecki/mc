@@ -1,4 +1,4 @@
-tcpdump -n ether multicast
+tcpdump -n ether multicast | grep -v "ARP"
 
 14:25:21.619883 IP 10.10.0.55 > 224.0.0.22: igmp v3 report, 1 group record(s)
 14:25:21.776909 IP 10.10.90.3 > 224.0.0.1: igmp query v2 [max resp time 10]

@@ -1,3 +1,5 @@
+package multicast;
+
 import static java.lang.System.nanoTime;
 
 public class NanoSleep {
