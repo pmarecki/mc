@@ -3,6 +3,7 @@ package multicast;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.net.NetworkInterface;
 
 public class MReceiver {
 
@@ -12,6 +13,7 @@ public class MReceiver {
         socket.setReceiveBufferSize(1<<20);
         InetAddress group = InetAddress.getByName("230.0.0.0");
         socket.joinGroup(group);
+        socket.setNetworkInterface(NetworkInterface.getByName("ens3"));
 
         System.out.println("--------------Receiver--------------");
         System.out.println("SO_RCVBUF (buffer size): " + socket.getReceiveBufferSize());
