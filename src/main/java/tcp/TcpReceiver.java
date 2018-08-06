@@ -10,7 +10,7 @@ class TcpReceiver {
     public static void main(String argv[]) throws Exception {
         String req;
         String repl;
-        ServerSocket acceptSocket = new ServerSocket(6789);
+        ServerSocket acceptSocket = new ServerSocket(4446);
         int cnt = 0;
         while (true) {
             Socket socket = acceptSocket.accept();
@@ -19,7 +19,7 @@ class TcpReceiver {
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
             req = in.readLine();
-//            System.out.println("Received: " + req);
+            System.out.println("Received: " + req);
             if (++cnt%1000==0) System.out.println(cnt);
             repl = req.toUpperCase() + '\n';
             out.writeBytes(repl);

@@ -1,0 +1,81 @@
+##################################
+## cisco multicast -- let's do it
+##################################
+## https://www.cisco.com/c/en/us/td/docs/ios/12_2/ip/configuration/guide/fipr_c/1cfmulti.html
+## 
+
+# Configuration
+
+R1(config)#ip multicast-routing
+R1(config-if)#ip pim sparse-mod
+R1(config-if)#ip igmp version 3
+R1(config)#ip pim rp-address 20.0.0.5
+R1(config-if)# ip igmp query-interval 20		#auto-adjusts querier-timeout
+
+R1# copy running-config startup-config
+
+(on receiver)
+# firewall-cmd --zone=public --add-protocol=igmp
+
+# View
+R1#sh ip int brief
+R1#sh ip mroute
+R1#sh ip igmp groups
+R1#sh ip pim rp
+R1#sh ip igmp int fa0/1
+
+
+# view - typical results
+
+R1#sh ip int brief
+	Interface                  IP-Address      OK? Method Status                Protocol
+	FastEthernet0/0            10.0.0.5        YES manual up                    up      
+	FastEthernet0/1            20.0.0.5        YES manual up                    up  
+
+R1#sh ip mroute
+	(*, 230.0.0.0), 00:05:22/00:02:58, RP 0.0.0.0, flags: SJC
+	  Incoming interface: Null, RPF nbr 0.0.0.0
+	  Outgoing interface list:
+	    FastEthernet0/0, Forward/Sparse, 00:00:04/00:02:58
+
+R1#sh ip igmp groups
+	Group Address    Interface                Uptime    Expires   Last Reporter   Group Accounted
+	230.0.0.0        FastEthernet0/0          01:17:51  00:02:08  10.0.0.2        
+	224.0.1.40       FastEthernet0/0          15:51:32  00:02:17  10.0.0.6  
+
+R1#sh ip pim rp
+	Group: 230.0.0.0, RP: 10.0.0.6, next RP-reachable in 00:00:08
+	Group: 224.0.1.40, RP: 10.0.0.6, next RP-reachable in 00:00:08
+
+R1#sh ip igmp int fa0/0
+	(full report on the interface, with igmp & routing)
+
+R1#sh ip multicast
+	  Multicast Routing: enabled
+	  Multicast Multipath: disabled
+	  Multicast Route limit: No limit
+	  Multicast Fallback group mode: Sparse
+	  Number of multicast boundaries configured with filter-autorp option: 0
+
+R1#debug ip igmp
+	*Aug  2 19:07:24.107: IGMP(0): v3 report on interface configured for v2, ignored
+	(...)
+
+
+#########################################
+# Debug issues: 
+# 
+
+_) receiver must allow connection onto port/udp
+
+_) receiver must have multicast enabled on interface
+
+_) receiver must allow igmp on interface
+
+_) receiver must see routes of incoming packets; else rp_filter will block traffic:
+https://serverfault.com/questions/163244/linux-kernel-not-passing-through-multicast-udp-packets
+
+
+
+
+

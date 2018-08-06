@@ -1,0 +1,10 @@
+[root@side java]# firewall-cmd --zone=public --list-all
+public
+  target: default
+  icmp-block-inversion: no
+  interfaces: 
+  sources: 
+  services: ssh dhcpv6-client
+  ports: 4446/udp
+  protocols: igmp
+
