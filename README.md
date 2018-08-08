@@ -160,7 +160,7 @@ by the kernel (e.g. by the `rp_filter` module). A good measure of the success
 of the receiving process is provided by the following rows of the `nstat` command:
 
 ```
-a301-7775-0432.ldn.swissbank.com:mareckip] nstat
+mc] nstat
 #kernel
 IpInReceives                    3484               0.0
 IpInDelivers                    3476               0.0
@@ -172,7 +172,7 @@ to check changes between its invocations). Alternatively, the command `netstat -
 a measure of the success of the `udp` operation:
 
 ```
-a301-7775-0432.ldn.swissbank.com:mareckip] netstat -su
+mc] netstat -su
 Udp:
     26651288834 packets received
     1299 packets to unknown port received.
